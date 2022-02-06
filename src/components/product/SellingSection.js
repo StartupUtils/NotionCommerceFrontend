@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import AddToCart from './AddToCart'
+import AddToCart from '../product/AddToCart';
 
-export default function SellingSection({ productInfo, inCart, addItem }) {
+export default function SellingSection({ productInfo, cart, manageCart }) {
     const [description, setDescription] = useState("");
     useEffect(() => {
         for (var i = 0; i < productInfo.selling_section.length; i++) {
@@ -15,7 +15,9 @@ export default function SellingSection({ productInfo, inCart, addItem }) {
     const sellingPoints = productInfo.selling_section.map((item, i) => {
         if ("bulleted_list_item" in item) {
             return <li key={i} className="text-gray-600">{item.bulleted_list_item}</li>
-        };
+        }
+        return null
+
     })
     return (
         <div className=' mt-2 lg:ml-20 md:ml-10'>
@@ -34,9 +36,9 @@ export default function SellingSection({ productInfo, inCart, addItem }) {
                 </ul>
             </div>
             <div className='mt-5 invisible md:visible'>
-                <p className='text-5xl text-gray-600'>$155.55</p>
+                <p className='text-5xl text-gray-600'>${productInfo.price}</p>
             </div>
-            <AddToCart productInfo={productInfo} inCart={inCart} addItem={addItem} />
+            <AddToCart productInfo={productInfo} cart={cart} manageCart={manageCart} />
         </div>
     )
 };

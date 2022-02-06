@@ -1,42 +1,34 @@
 import { useState, useEffect } from 'react';
-import ProductPage from "./pages/ProductPage";
+import findFocus from './utils/findFocus';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-import CheckoutPage from './pages/CheckoutPage';
+import CartPage from './pages/CartPage';
+import Home from './pages/Home';
+import ProductPage from './pages/ProductPage';
+import Products from './pages/Products';
+import Imageupload from './pages/ImageUpload';
+import ShowImages from './pages/ShowImages';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const localCart = localStorage.getItem("myCart");
-    if (localCart) {
-      setCartItems(JSON.parse(localCart));
-    } else {
-      localStorage.setItem("myCart", JSON.stringify([]))
-    }
-  }, []);
-
-  const addItem = (item) => {
-    const localCart = localStorage.getItem("myCart");
-    if (localCart) {
-      let data = JSON.parse(localCart);
-      data.push(item);
-      setCartItems(data);
-      localStorage.setItem('myCart', JSON.stringify(data));
-    } else {
-      setCartItems([item]);
-      localStorage.setItem('myCart', JSON.stringify([item]))
-    }
-
-  }
+  const [cart, setCart] = useState(null);
+  const [refresh, setRefresh] = useState(null);
+  let focus = localStorage.getItem("focus")
+  useEffect((findFocusFunc = findFocus) => {
+    findFocusFunc(setCart)
+  }, [refresh])
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/product/*" element={<ProductPage addItem={addItem} cart={cartItems} />} />
-        <Route path="/cart" element={<CheckoutPage cartItems={cartItems} />} />
+        <Route path="/" element={<Home />} />
+        <Route exact path="/cart" element={focus ? <CartPage setCart={setCart} cart={cart} setRefresh={setRefresh} refresh={refresh} /> : <Home focus={focus} />} />
+        <Route path="/cart/*" element={<CartPage setCart={setCart} cart={cart} setRefresh={setRefresh} refresh={refresh} />} />
+        <Route path="/product/*" element={<ProductPage cart={cart} setRefresh={setRefresh} />} />
+        <Route path="/products" element={<Products cart={cart} />} />
+        <Route path="/manage_image/load/*" element={<Imageupload />} />
+        <Route path="/manage_image/show/*" element={<ShowImages />} />
       </Routes>
     </BrowserRouter>
   );

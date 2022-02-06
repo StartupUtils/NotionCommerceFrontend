@@ -1,9 +1,21 @@
 import { useState } from 'react';
 
-export default function AddToCart({ productInfo, inCart, addItem }) {
+export default function AddToCart({ productInfo, cart, manageCart }) {
     const [quantity, setQuantity] = useState(1)
     const [plus, setPlus] = useState("ml-2 fill-current text-gray-600 w-3")
     const [neg, setNeg] = useState("mr-2 fill-current text-gray-600 w-3")
+    let inCart = false;
+    const findIt = (item) => {
+        return item.id === productInfo.key
+    }
+    if (cart) {
+        if (cart.data) {
+            let status = cart.data.find(findIt)
+            if (status) {
+                inCart = true
+            }
+        }
+    }
 
     const highlight = (target, color) => {
         if (target === "plus") {
@@ -16,12 +28,9 @@ export default function AddToCart({ productInfo, inCart, addItem }) {
     const addToTheCart = () => {
         let data = {
             "id": productInfo.key,
-            "quant": quantity,
-            "images": productInfo.images,
-            "title": productInfo.title,
+            "quant": quantity
         };
-        // console.log(data)
-        addItem(data)
+        manageCart(data)
     }
     const incrementQuant = () => {
         const newQuant = quantity + 1
@@ -59,7 +68,7 @@ export default function AddToCart({ productInfo, inCart, addItem }) {
                         <a
                             onClick={() => addToTheCart()}
                             href="#"
-                            className="flex items-center h-16 md:h-10 md:mt-1 justify-center py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-400 md:px-10"
+                            className="flex items-center h-16 md:h-10 md:mt-1 justify-center py-2 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-900 md:px-10"
                         >
                             Add to Cart
                         </a>
@@ -73,8 +82,7 @@ export default function AddToCart({ productInfo, inCart, addItem }) {
 
                 <div className="rounded-md shadow m-3">
                     <a
-                        onClick={() => console.log('button')}
-                        href="#"
+                        href="/cart"
                         className="flex items-center md:mt-1 justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-cyan-600 bg-green-200 hover:bg-green-300 md:px-10"
                     >
                         Continue to Checkout!

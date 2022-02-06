@@ -1,13 +1,10 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Disclosure } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Products', href: '/products', current: false },
+    { name: 'About', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -15,10 +12,14 @@ function classNames(...classes) {
 }
 
 export default function NavBar({ cart }) {
-    let nItemsInCart = cart.length;
-    console.log(nItemsInCart)
+    let nItemsInCart = 0;
+    if (!cart) {
+        nItemsInCart = 0
+    } else if (cart.data) {
+        nItemsInCart = cart.data.length;
+    }
     return (
-        <Disclosure as="nav" className=" bg-cyan-900">
+        <Disclosure as="nav" className=" bg-cyan-700">
             {({ open }) => (
                 <>
                     <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -38,12 +39,12 @@ export default function NavBar({ cart }) {
                                 <div className="flex-shrink-0 flex items-center">
                                     <img
                                         className="block lg:hidden h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                                        src="http://localhost:8000/images/fetch/logo"
                                         alt="Workflow"
                                     />
                                     <img
                                         className="hidden lg:block h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                                        src="http://localhost:8000/images/fetch/logo"
                                         alt="Workflow"
                                     />
                                 </div>
@@ -54,7 +55,7 @@ export default function NavBar({ cart }) {
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-cyan-900 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
@@ -66,18 +67,20 @@ export default function NavBar({ cart }) {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <button
-                                    type="button"
-                                    className="p-1 rounded-full text-gray-400 hover:text-white "
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 34 24" stroke="currentColor">
+                                <a href="/cart">
+                                    <button
+                                        type="button"
+                                        className="p-1 rounded-full text-gray-400 hover:text-white "
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 34 24" stroke="currentColor">
 
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    <div className=' ml-6 mt-1 absolute inset-y-2 h-4 w-4 bg-red-700 ring-2 rounded-full'>
-                                        <p className='relitave text-white text-xs'>{nItemsInCart}</p>
-                                    </div>
-                                </button>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        <div className=' ml-6 mt-1 absolute inset-y-2 h-4 w-4 bg-red-700 ring-2 rounded-full'>
+                                            <p className='relitave text-white text-xs'>{nItemsInCart}</p>
+                                        </div>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
