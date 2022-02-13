@@ -4,7 +4,6 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
     { name: 'Products', href: '/products', current: false },
-    { name: 'About', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -39,12 +38,12 @@ export default function NavBar({ cart }) {
                                 <div className="flex-shrink-0 flex items-center">
                                     <img
                                         className="block lg:hidden h-8 w-auto"
-                                        src="http://localhost:8000/images/fetch/logo"
+                                        src="/images/fetch/logo.png"
                                         alt="Workflow"
                                     />
                                     <img
                                         className="hidden lg:block h-8 w-auto"
-                                        src="http://localhost:8000/images/fetch/logo"
+                                        src="/images/fetch/logo.png"
                                         alt="Workflow"
                                     />
                                 </div>

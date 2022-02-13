@@ -17,7 +17,7 @@ export default function CartPage({ setCart, cart, refresh, setRefresh }) {
     }
     useEffect((createFocusFunc = createFocus) => {
         createFocusFunc(setCart, orderKey)
-        const url = getStripeUrl(orderKey, setStripeUrl)
+        getStripeUrl(orderKey, setStripeUrl)
     }, [refresh, orderKey, setCart]);
     if (cart) {
         return (
@@ -34,6 +34,11 @@ export default function CartPage({ setCart, cart, refresh, setRefresh }) {
             </div>
         )
     } else {
-        return <div>no cart</div>
+        return (<div>
+            <NavBar cart={cart} />
+                        <div className=" text-center mt-48">
+                <h1 className=" text-4xl text-slate-700 font-bold">No items in cart</h1>
+            </div>
+        </div>)
     }
 }

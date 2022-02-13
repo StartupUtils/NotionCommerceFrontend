@@ -14,7 +14,7 @@ export default function ImageScroll({ images }) {
     })
     return (
         <div>
-            <img alt={images[focus]} className="w-screen" src={images[focus]} />
+            <img alt={images[focus]} className=" max-h-[600px]" src={images[focus]} />
             <div className=" flex flex-wrap items-center mt-1">
                 {imageItems}
             </div>

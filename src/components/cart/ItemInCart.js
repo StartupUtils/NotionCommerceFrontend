@@ -16,7 +16,6 @@ const click = (listing) => {
 }
 
 export default function ItemInCart({ setRefresh, focus, listing }) {
-    console.log(listing)
     return (
         <div className=" pr-2 mb-4 md:pr-0 bg-gray-50 hover:bg-gray-200 rounded-md shadow-md">
             <div className='mx-auto w-full flex flew-row'>
@@ -31,7 +30,7 @@ export default function ItemInCart({ setRefresh, focus, listing }) {
                     </div>
                     <div className=" mt-2 md:h-0 md:w-0 md:invisible flex flew-row">
                         <div className=" mr-6 mt-0 md:h-7 rounded-md border-2 border-cyan-600 bg-gray-200 flex justify-center w-20">
-                            <svg onClick={() => { modCart(focus, listing.id, "neg", setRefresh) }} onMouseEnter={() => { console.log('ere') }} className="mr-2 fill-current text-gray-600 hover:text-cyan-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                            <svg onClick={() => { modCart(focus, listing.id, "neg", setRefresh) }} className="mr-2 fill-current text-gray-600 hover:text-cyan-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                             </svg>
 
                             <p className=' md:pt-0 bg-gray-50 pl-2 pr-2 text-gray-700 text-md'>{listing.quant}</p>
@@ -47,7 +46,7 @@ export default function ItemInCart({ setRefresh, focus, listing }) {
                     <div onClick={() => { modCart(focus, listing.id, "remove", setRefresh) }} className="text-red-400 font-semibold text-sm">Remove</div>
                     <p className=' invisible md:visible h-0 md:h-auto mt-1 text-gray-700 text-xs md:mt-8'>Quantity</p>
                     <div className=" mt-0 md:h-7 rounded-md border-2 border-cyan-600 bg-gray-200 flex justify-center w-20">
-                        <svg onClick={() => { modCart(focus, listing.id, "neg", setRefresh) }} onMouseEnter={() => { console.log('ere') }} className="mr-2 fill-current text-gray-600 w-3 hover:text-cyan-600" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                        <svg onClick={() => { modCart(focus, listing.id, "neg", setRefresh) }} className="mr-2 fill-current text-gray-600 w-3 hover:text-cyan-600" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                         </svg>
 
                         <p className=' md:pt-0 bg-gray-50 pl-2 pr-2 text-gray-700 text-md'>{listing.quant}</p>

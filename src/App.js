@@ -11,6 +11,7 @@ import ProductPage from './pages/ProductPage';
 import Products from './pages/Products';
 import Imageupload from './pages/ImageUpload';
 import ShowImages from './pages/ShowImages';
+import Success from './pages/Success';
 
 function App() {
   const [cart, setCart] = useState(null);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/products" element={<Products cart={cart} />} />
         <Route path="/manage_image/load/*" element={<Imageupload />} />
         <Route path="/manage_image/show/*" element={<ShowImages />} />
+        <Route path="/success" element={<Success cart={cart}/>} />
       </Routes>
     </BrowserRouter>
   );
